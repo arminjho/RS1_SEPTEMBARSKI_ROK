@@ -290,4 +290,63 @@ export class DialogHelperService {
       );
     }
   };
+
+
+  offer = {
+    confirmDelete: (productName: string) => {
+      return this.confirmDelete(
+        productName,
+        'PRODUCTS.DIALOGS.DELETE_MESSAGE'
+      );
+    },
+
+    confirmCancel: () => {
+      return this.confirm(
+        'PRODUCTS.DIALOGS.UNSAVED_CHANGES',
+        'PRODUCTS.DIALOGS.CONFIRM_CANCEL'
+      );
+    },
+
+    showCreateSuccess: () => {
+      return this.showSuccess(
+        'DIALOGS.TITLES.SUCCESS',
+        'PRODUCTS.DIALOGS.SUCCESS_CREATE'
+      );
+    },
+
+    showUpdateSuccess: () => {
+      return this.showSuccess(
+        'DIALOGS.TITLES.SUCCESS',
+        'PRODUCTS.DIALOGS.SUCCESS_UPDATE'
+      );
+    },
+
+    showDeleteSuccess: () => {
+      return this.showSuccess(
+        'DIALOGS.TITLES.SUCCESS',
+        'PRODUCTS.DIALOGS.SUCCESS_DELETE'
+      );
+    },
+
+    showCreateError: () => {
+      return this.showError(
+        'DIALOGS.TITLES.ERROR',
+        'PRODUCTS.DIALOGS.ERROR_CREATE'
+      );
+    },
+
+    showUpdateError: () => {
+      return this.showError(
+        'DIALOGS.TITLES.ERROR',
+        'PRODUCTS.DIALOGS.ERROR_UPDATE'
+      );
+    },
+
+    showDeleteError: () => {
+      return this.showError(
+        'DIALOGS.TITLES.ERROR',
+        'PRODUCTS.DIALOGS.ERROR_DELETE'
+      );
+    }
+  };
 }
