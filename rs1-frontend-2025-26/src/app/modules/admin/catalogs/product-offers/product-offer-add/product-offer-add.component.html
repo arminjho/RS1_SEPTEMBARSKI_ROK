@@ -1,1 +1,108 @@
-<section class="form-page"><header><button mat-icon-button title="Nazad" (click)="cancel()"><mat-icon>arrow_back</mat-icon></button><h1>Nova promotivna ponuda</h1></header><form [formGroup]="form"><mat-form-field appearance="outline"><mat-label>Oznaka</mat-label><input matInput formControlName="code"></mat-form-field><mat-form-field appearance="outline"><mat-label>Proizvod</mat-label><mat-select formControlName="productId">@for(product of products; track product.id){<mat-option [value]="product.id">{{product.name}}</mat-option>}</mat-select></mat-form-field><mat-form-field appearance="outline"><mat-label>Popust (%)</mat-label><input matInput type="number" formControlName="discountPercent"></mat-form-field><mat-form-field appearance="outline"><mat-label>Vazi do</mat-label><input matInput [matDatepicker]="picker" formControlName="validUntilUtc"><mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle><mat-datepicker #picker></mat-datepicker></mat-form-field><div class="actions"><button mat-button type="button" (click)="cancel()">Odustani</button><button mat-flat-button color="primary" type="button" (click)="save()">Sacuvaj</button></div></form></section>
+<div class="container">
+  <!-- Header -->
+  <div class="header-card mat-elevation-z2">
+    <h1>dodavanje ponude</h1>
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card mat-elevation-z2">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error-banner">
+        <mat-icon>error</mat-icon>
+        <span>greska</span>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>{{ 'PRODUCTS.ADD.SAVING' | translate }}</p>
+      </div>
+
+      <!-- Product Name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>oznaka</mat-label>
+        <input
+          matInput
+          formControlName="code"
+          [placeholder]="'OFF-JESEN'"
+        />
+        <mat-icon matSuffix>inventory_2</mat-icon>
+        <mat-error *ngIf="hasError('code')">
+          error neipsravan unos
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>oznaka</mat-label>
+        <input
+          matInput [matDatepicker]="picker"
+          formControlName="validUntilUtc"
+          [placeholder]="'26.11.2002'"
+
+          
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+       <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('code')">
+          error neipsravan unos
+        </mat-error>
+      </mat-form-field>
+
+      
+
+      <!-- Price and Category Row -->
+      <div class="form-row">
+        <!-- Price -->
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>popust</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="discountPercent"
+            step="0.01"
+            [placeholder]="'15'"
+          />
+          <span matTextPrefix>%&nbsp;</span>
+          <mat-icon matSuffix>payments</mat-icon>
+          <mat-error *ngIf="hasError('discountPercent')">
+           
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Category -->
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>proizvod</mat-label>
+          <mat-select formControlName="productId">
+            <mat-option *ngFor="let product of products" [value]="product.id">
+              {{ product.name }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-error *ngIf="hasError('productId')">
+            error
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button type="button" mat-stroked-button (click)="onCancel()" [disabled]="isLoading">
+          <mat-icon>close</mat-icon>
+          {{ 'PRODUCTS.FORM.CANCEL' | translate }}
+        </button>
+
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="form.invalid || isLoading"
+        >
+          <mat-icon>save</mat-icon>
+          {{ 'PRODUCTS.FORM.SAVE' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -45,7 +45,7 @@
         <th mat-header-cell *matHeaderCellDef>Akcije</th>
         <td mat-cell *matCellDef="let row"><button mat-icon-button title="Uredi"
             (click)="edit(row.id)"><mat-icon>edit</mat-icon></button><button mat-icon-button title="Obrisi"
-            [disabled]="row.isEnabled" (click)="delete(row.id)"><mat-icon>delete</mat-icon></button></td>
+            [disabled]="row.isEnabled" (click)="onDelete(row)"><mat-icon>delete</mat-icon></button></td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

@@ -32,7 +32,7 @@ public sealed class ListProductOffersQueryHandler(IAppDbContext ctx)
                 DiscountPercent = x.DiscountPercent,
                 Price = x.Product.Price,
                 Status=x.IsEnabled==false ? ProductOfferStateType.Iskljucena : x.ValidUntilUtc < today ? ProductOfferStateType.Istekla : ProductOfferStateType.Aktivna,
-
+                ValidUntilUtc=x.ValidUntilUtc,
             });
 
         return await PageResult<ListProductOffersQueryDto>.FromQueryableAsync(projectedQuery, request.Paging, ct);

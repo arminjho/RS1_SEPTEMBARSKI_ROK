@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import { buildHttpParams } from '../../core/models/build-http-params';
-import { CreateProductOfferCommand, ListProductOffersRequest, ListProductOffersResponse } from './product-offers-api.models';
+import { CreateProductOfferCommand, GetProductOfferByIdQueryDto, ListProductOffersRequest, ListProductOffersResponse, UpdateProductOfferCommand } from './product-offers-api.models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,10 @@ export class ProductOffersApiService {
       params,
     });
   }
+
+    getById(id: number): Observable<GetProductOfferByIdQueryDto> {
+      return this.http.get<GetProductOfferByIdQueryDto>(`${this.baseUrl}/${id}`);
+    }
 
   /**
    * GET /Products/{id}
@@ -53,4 +57,8 @@ export class ProductOffersApiService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+    update(id: number, payload: UpdateProductOfferCommand): Observable<void> {
+      return this.http.put<void>(`${this.baseUrl}/${id}`, payload);
+    }
 }

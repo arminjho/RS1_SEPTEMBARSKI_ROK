@@ -1,4 +1,7 @@
 ﻿using Market.Application.Modules.Catalog.ProductOffers.Commands.Create;
+using Market.Application.Modules.Catalog.ProductOffers.Commands.Delete;
+using Market.Application.Modules.Catalog.ProductOffers.Commands.Update;
+using Market.Application.Modules.Catalog.ProductOffers.Queries.GetById;
 using Market.Application.Modules.Catalog.ProductOffers.Queries.List;
 using Market.Application.Modules.Catalog.Products.Commands.Create;
 using Market.Application.Modules.Catalog.Products.Commands.Delete;
@@ -24,7 +27,7 @@ namespace Market.API.Controllers
 
         [HttpPut("{id:int}")]
         [Authorize(Policy = "Staff")]
-        public async Task Update(int id, UpdateProductCommand command, CancellationToken ct)
+        public async Task Update(int id, UpdateProductOfferCommand command, CancellationToken ct)
         {
             // ID from the route takes precedence
             command.Id = id;
@@ -36,15 +39,15 @@ namespace Market.API.Controllers
         [Authorize(Policy = "Staff")]
         public async Task Delete(int id, CancellationToken ct)
         {
-            await sender.Send(new DeleteProductCommand { Id = id }, ct);
+            await sender.Send(new DeleteProductOfferCommand { Id = id }, ct);
             // no return -> 204 No Content
         }
 
         [HttpGet("{id:int}")]
         [AllowAnonymous]
-        public async Task<GetProductByIdQueryDto> GetById(int id, CancellationToken ct)
+        public async Task<GetProductOfferByIdQueryDto> GetById(int id, CancellationToken ct)
         {
-            var category = await sender.Send(new GetProductByIdQuery { Id = id }, ct);
+            var category = await sender.Send(new GetProductOfferByIdQuery { Id = id }, ct);
             return category; // if NotFoundException -> 404 via middleware
         }
 

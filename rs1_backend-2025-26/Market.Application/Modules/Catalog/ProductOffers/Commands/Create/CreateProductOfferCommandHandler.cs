@@ -48,6 +48,7 @@ public class CreateProductOfferCommandHandler(
             ProductId = request.ProductId,
             DiscountPercent = request.DiscountPercent,
             ValidUntilUtc = request.ValidUntilUtc,
+            IsEnabled = true
         };
 
         ctx.ProductOffers.Add(offer);

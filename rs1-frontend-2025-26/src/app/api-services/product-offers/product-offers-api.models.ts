@@ -49,8 +49,25 @@ export interface CreateProductOfferCommand {
  
   code: string;
   productId: number;
-  price: number;
+  
   discountPercent: number;
   validUntilUtc: Date;
   
+}
+
+
+export interface UpdateProductOfferCommand {
+  code: string;
+  productId: number;
+  discountPercent: number;
+  validUntilUtc: Date;
+}
+
+export interface GetProductOfferByIdQueryDto {
+  id: number;
+  code: string;
+  productId: number;
+  discountPercent: number;
+  validUntilUtc: Date;
+  isEnabled:boolean;
 }
